@@ -12,3 +12,17 @@ spec:
         limits:
           memory: "64Mi"
           cpu: "500m"
+
+# kubectl delete pod twocontainers
+# kubectl delete pod constraintpod
+
+# https://www.cloudsavvyit.com/11041/how-to-clean-up-old-containers-and-images-in-your-kubernetes-cluster/
+# Not suggest clean up old images manually...?
+
+# https://kubernetes.io/docs/concepts/architecture/garbage-collection/
+# https://stackoverflow.com/questions/36409855/how-to-clean-up-old-unused-kubernetes-images-tags
+# It seems I need set the two flags to zero. Flags usage is deprecated.
+# But minikube seems can only pass by flag, not config file.
+
+# https://stackoverflow.com/questions/42564058/how-to-use-local-docker-images-with-minikube
+# Put all minikube images into local registry...? Maybe self hosted registry is better.
