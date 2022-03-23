@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sise-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sise
+  template:
+    metadata:
+      labels:
+        app: sise
+    spec:
+      containers:
+        - name: sise
+          image: quay.io/openshiftlabs/simpleservice:0.5.0
+          ports:
+            - containerPort: 9876
+          env:
+            - name: SIMPLE_SERVICE_VERSION
+              value: "1.0"
+
+# Now we update to v1.0
+# I know what will happen already xD
+
+# kubectl rollout history deploy/sise-deploy
+# But there is a history of the deployment???
+
+# https://intellij-support.jetbrains.com/hc/en-us/community/posts/115000789230-ctrl-left-and-ctrl-right-not-working-in-terminal
+# Ah IDEA's Terminal is annoying... Fix - Broken - Fix - Broken...
+
+# Back to deployment, I noticed the reason of Replica Sets changed.
+# https://stackoverflow.com/questions/62926070/kubernetes-change-cause
+# But --record flag is deprecated......
+
+# https://github.com/kubernetes/kubernetes/issues/40422
+# https://github.com/kubernetes/kubernetes/pull/102873
+
+# kubectl rollout undo deploy/sise-deploy --to-revision=1
+# Yes we can roll back, but now --record flag is missing as default.

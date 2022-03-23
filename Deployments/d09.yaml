@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sise-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sise
+  template:
+    metadata:
+      labels:
+        app: sise
+    spec:
+      containers:
+        - name: sise
+          image: quay.io/openshiftlabs/simpleservice:0.5.0
+          ports:
+            - containerPort: 9876
+          env:
+            - name: SIMPLE_SERVICE_VERSION
+              value: "0.9"
+
+# The IDEA's plugins "Kubernetes" shows all.
+# We make a template, and reply twice by using selector.
+# so now we know spec can nest in template.
+
+# If I edit the env variable and update,
+# I noticed k8s replace the original 2 pods.
+
+# https://github.com/kubernetes/kubernetes/issues/8876
+# So it can exec on multiple machine...?
+# Looks like just exec on one machine.
