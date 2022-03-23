@@ -14,3 +14,6 @@ spec:
         - "bin/bash"
         - "-c"
         - "sleep 10000"
+
+# Change sleep timeout to 10 and watch the events!
+# The container will restart automatically.
