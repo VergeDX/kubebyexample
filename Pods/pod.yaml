@@ -17,3 +17,6 @@ spec:
 
 # Change sleep timeout to 10 and watch the events!
 # The container will restart automatically.
+
+# https://stackoverflow.com/questions/51931113/kubectl-get-events-only-for-a-pod
+# kubectl get events --field-selector involvedObject.name=twocontainers
