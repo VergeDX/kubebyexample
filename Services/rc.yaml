@@ -1,11 +1,12 @@
-apiVersion: v1
-kind: ReplicationController
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: rcsise
 spec:
-  replicas: 1
+  replicas: 3
   selector:
-    app: sise
+    matchLabels:
+      app: sise
   template:
     metadata:
       name: somename
@@ -17,3 +18,24 @@ spec:
           image: quay.io/openshiftlabs/simpleservice:0.5.0
           ports:
             - containerPort: 9876
+
+# https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/
+# A new type ReplicationController, deprecated now...
+# Use Deployment + ReplicaSet is now recommended way.
+
+# Oh, I noticed they are same thing in different API namespaces.
+# IDEA will auto changes app version 1 -> app/v1 if I use ReplicaSet.
+
+# Make replicas from 1 to 3, I noticed master node runs container.
+# https://kumargaurav1247.medium.com/no-pod-on-master-node-why-kubernetes-6afb07b05ce6
+# So minikube's master node will not set the Taint flag.
+
+# Let's do something fun! make replicas from 1 to 3, and expose a services.
+# Next page: ./svc.yaml!
+
+# ReplicationController -> Deployment and apply, the 6 containers all exists!
+# So different types of thing can use the same name...?
+# Oh, it sees Replica Sets will auto add a random suffix.
+
+# error: no history viewer has been implemented for "ReplicationController"
+# Let we make this object to Deployment!

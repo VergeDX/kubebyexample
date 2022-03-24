@@ -3,8 +3,24 @@ kind: Service
 metadata:
   name: simpleservice
 spec:
+  type: LoadBalancer
   ports:
     - port: 80
       targetPort: 9876
   selector:
-    app: sise
+    app: resise
+
+# https://kubernetes.io/docs/tutorials/hello-minikube/
+# I noticed `minikube service list` can detect all services.
+
+# Service has several types, LoadBalancer do things literally.
+# Tip: Ctrl + Q on "type" can show the documents.
+
+# https://stackoverflow.com/questions/57957516/kubernetes-failed-to-update-endpoints-warning
+# 3 pods with type = LoadBalancer will trigger this...
+# https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending
+# It saves me few minutes : ), good job!
+# https://minikube.sigs.k8s.io/docs/handbook/accessing/#using-minikube-tunnel
+
+# So minikube implemented the LoadBalancer type.
+# But we should run `minikube tunnel` in foreground.
