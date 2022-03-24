@@ -8,7 +8,7 @@ spec:
     - port: 80
       targetPort: 9876
   selector:
-    app: resise
+    app: sise
 
 # https://kubernetes.io/docs/tutorials/hello-minikube/
 # I noticed `minikube service list` can detect all services.
@@ -24,3 +24,9 @@ spec:
 
 # So minikube implemented the LoadBalancer type.
 # But we should run `minikube tunnel` in foreground.
+
+# Services match a set of Pods using "labels and selectors"
+# So all the object manipulate pods, services expose pods.
+
+# Expose will also make DNS record, then:
+# `curl -s simpleservice/info` on pods can be balanced.
