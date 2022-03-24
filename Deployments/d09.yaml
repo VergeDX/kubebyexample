@@ -31,3 +31,10 @@ spec:
 # https://github.com/kubernetes/kubernetes/issues/8876
 # So it can exec on multiple machine...?
 # Looks like just exec on one machine.
+
+# Update: Now I have a 3 nodes cluster. I found something new.
+# It seems Deployments contains Replica Sets, which contains Pods.
+# And one Pods in m02, another is in m03.
+
+# One pod with 1+ containers will always run together.
+# https://kubernetes.io/docs/tasks/access-application-cluster/communicate-containers-same-pod-shared-volume/
