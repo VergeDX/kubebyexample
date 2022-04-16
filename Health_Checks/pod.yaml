@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hc
+spec:
+  containers:
+    - name: sise
+      image: quay.io/openshiftlabs/simpleservice:0.5.0
+      ports:
+        - containerPort: 9876
+      livenessProbe:
+        initialDelaySeconds: 2
+        periodSeconds: 5
+        httpGet:
+          path: /health
+          port: 9876
+
+# https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+# Container probes, it supports multi ways like gRPC!
+
+# kubectl port-forward hc 9876
+# curl 127.0.0.1:9876/health
+
+# livenessProbe, has a container init delay, will kill container if failure.
+# readinessProbe, delete pods from service if failure.
+# startupProbe, disable others probes before this, kill container if failure.

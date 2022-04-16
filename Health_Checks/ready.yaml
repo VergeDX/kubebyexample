@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ready
+spec:
+  containers:
+    - name: sise
+      image: quay.io/openshiftlabs/simpleservice:0.5.0
+      ports:
+        - containerPort: 9876
+      readinessProbe:
+        initialDelaySeconds: 10
+        failureThreshold: 3 # Default value
+        httpGet:
+          path: /health
+          port: 9876
+
+# https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+# Probe: liveness x= restart, readiness x= remove from service.
+
+# wait 10 s and do probe,
+# before that, pod is not ready.
