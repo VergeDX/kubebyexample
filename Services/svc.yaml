@@ -3,7 +3,8 @@ kind: Service
 metadata:
   name: simpleservice
 spec:
-  type: LoadBalancer
+  # https://github.com/kubernetes/minikube/issues/384
+  type: NodePort
   ports:
     - port: 80
       targetPort: 9876
