@@ -24,6 +24,7 @@ spec:
 
 # So minikube implemented the LoadBalancer type.
 # But we should run `minikube tunnel` in foreground.
+# https://kubernetes.io/docs/tutorials/hello-minikube/
 
 # Services match a set of Pods using "labels and selectors"
 # So all the object manipulate pods, services expose pods.
