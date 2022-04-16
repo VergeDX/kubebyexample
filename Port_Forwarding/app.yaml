@@ -24,7 +24,13 @@ metadata:
   name: simpleservice
 spec:
   ports:
-    - port: 80
-      targetPort: 9876
+    - port: 80 # Which is forward out of the Pod.
+      targetPort: 9876 # Which is Pod listening on.
   selector:
     app: sise
+
+# https://kubernetes.io/zh/docs/concepts/services-networking/service/#publishing-services-service-types
+# Default services type is `ClusterIP`, which can only access from inner cluster.
+
+# kubectl port-forward service/simpleservice 8080:80
+# Port forwarding to localhost:8080, access it and have fun!
