@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podintest
+  # namespace: notExists
+  # namespace notExists not found.
+spec:
+  containers:
+    - name: sise
+      image: quay.io/openshiftlabs/simpleservice:0.5.0
+      ports:
+        - containerPort: 9876
+
+# In IDEA Services Tab, changes namespace to test,
+# Then apply the yaml, resources will auto created in test.
